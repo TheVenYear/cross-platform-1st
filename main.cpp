@@ -16,10 +16,14 @@ void ListTask()
         std::cout << item << ' ';
     }
     std::cout << "\n";
-    shaker = merge = bubble;
+
+    shaker.append(bubble);
+    merge.append(bubble);
+
     shaker.shakerSort();
     bubble.bubbleSort();
     merge.mergeSort();
+
     std::cout << "Bubble sort: ";
     bubble.print();
     std::cout << "Shaker sort: ";
@@ -41,10 +45,14 @@ void VectorTask()
         std::cout << item << ' ';
     }
     std::cout << "\n";
-    shaker = merge = bubble;
+
+    shaker.append(bubble);
+    merge.append(bubble);
+
     shaker.shakerSort();
     bubble.bubbleSort();
     merge.mergeSort();
+
     std::cout << "Bubble sort: ";
     bubble.print();
     std::cout << "Shaker sort: ";
@@ -66,7 +74,10 @@ void QueueTask()
         std::cout << item << ' ';
     }
     std::cout << "\n";
-    shaker = merge = bubble;
+
+    shaker.append(bubble);
+    merge.append(bubble);
+
     shaker.shakerSort();
     bubble.bubbleSort();
     merge.mergeSort();

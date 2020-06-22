@@ -44,49 +44,38 @@ void ExtendedQueue::shakerSort()
     }
 }
 
-void ExtendedQueue::merge(int l, int m, int r)
+void ExtendedQueue::merge(int low, int high, int mid)
 {
-  int i = l;
-  int j = m + 1;
-  int k = l;
-
-  double temp[5];
-
-  while (i <= m && j <= r)
-  {
-    if (this->at(i) <= this->at(j))
-    {
-      temp[k] = this->at(i);
-      i++;
-      k++;
+    int i, j, k;
+    double c[50];
+    i = low;
+    k = low;
+    j = mid + 1;
+    while (i <= mid && j <= high) {
+        if (this->at(i) < this->at(j)) {
+            c[k] = this->at(i);
+            k++;
+            i++;
+        }
+        else  {
+            c[k] = this->at(j);
+            k++;
+            j++;
+        }
     }
-
-    else
-    {
-      temp[k] = this->at(j);
-      j++;
-      k++;
+    while (i <= mid) {
+        c[k] = this->at(i);
+        k++;
+        i++;
     }
-
-  }
-
-  while (i <= m)
-  {
-    temp[k] = this->at(i);
-    i++;
-    k++;
-
-  }
-
-  while (j <= r)
-  {
-    temp[k] = this->at(j);
-    j++;
-    k++;
-  }
-
-  for (int p = l; p <= r; p++)
-    this->replace(p, temp[p]);
+    while (j <= high) {
+        c[k] = this->at(j);
+        k++;
+        j++;
+    }
+    for (i = low; i < k; i++)  {
+        this->replace(i, c[i]);
+    }
 }
 
 void ExtendedQueue::mergeSort()
@@ -94,17 +83,15 @@ void ExtendedQueue::mergeSort()
     mergeSort(0, this->size() - 1);
 }
 
-void ExtendedQueue::mergeSort(int l, int r)
+void ExtendedQueue::mergeSort(int low, int high)
 {
-  if (l < r)
-  {
-    int m = (l + r) / 2;
-
-    mergeSort(l, m);
-    mergeSort(m + 1, r);
-
-    merge(l, m, r);
-  }
+    int mid;
+    if (low < high){
+        mid=(low + high) / 2;
+        mergeSort(low, mid);
+        mergeSort(mid+1, high);
+        merge(low, high, mid);
+    }
 }
 
 void ExtendedQueue::set()
